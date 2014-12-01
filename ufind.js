@@ -4,39 +4,54 @@ var fs = require('fs')
   , pkg = JSON.parse(fs.readFileSync(__dirname+'/package.json', 'utf-8'))
   ;
 program
-	.version(pkg.version)
-	.option('-p, --path [path]', 'Search directory path')
-	.option('-r, --recursive', 'Recursive')
+    .version(pkg.version)
+    .option('-p, --path [path]', 'Input search directory')
+    .option('-r, --recursive', 'Recursive')
     .option('-o, --output [file]', 'Output file')
+    .option('-j, --json', 'Output JSON format')
     
-    .option('-sf, --skipFile[boolean]', 'Skip file')
-    .option('-sd, --skipDir', 'Skip directory')
+    .option('-s, --skipFile', 'Skip file')
+    .option('-i, --includeFile', 'File include filter')
+    .option('-e, --excludeFile', 'File exclude filter')
     
-    .option('-if, --includeFile', 'File include filter')
-    .option('-ef, --excludeFile', 'File exclude filter')
-    
-    .option('-id, --includeDir', 'Directory exclude filter')
-    .option('-ed, --excludeFile', 'Directory exclude filter')
-    
-	.parse(process.argv)
-	;
+    .option('-S, --skipDir', 'Skip directory')
+    .option('-I, --includeDir', 'Directory exclude filter')
+    .option('-E, --excludeFile', 'Directory exclude filter')
+    .parse(process.argv)
+    ;
 
-if (!program.path) {
-	program.help();
-} else {
-    (program.path || program.path === true) && (program.path = '');
-    if (!program.output) {
-        program.process = function(r, strPath, dir, file, stat){
-            console.log(r);
+(!program.path || (program.path === true)) && (program.path = '');
+
+var buffered = program.json || program.output;
+
+if (!buffered) {
+    program.process = function(r, strPath, dir, file, stat){
+        console.log(r);
+    }
+}
+
+function exitIfError(err){
+    if (err) {
+        console.error('!Error:');
+        console.error();
+        console.error(err);
+        process.exit(1);
+    }
+}
+
+var finder = new Finder(program);
+finder.find(program.path, function(err, datas){
+    exitIfError(err);
+    if (buffered) {
+        var odata = program.json 
+            ? JSON.stringify(datas, 4, 4) 
+            : datas.join(/*process.platform == 'win32' ? '\r\n' : */'\n') ;
+        if (program.output) {
+            fs.writeFile(program.output, odata, function(err){
+                exitIfError(err);
+            })
+        } else {
+            console.log(odata) ;
         }
     }
-    var finder = new Finder(program);
-    finder.find(program.path, function(err, datas){
-        if (err) {
-            console.log(err);
-        } else if (program.output) {
-            console.log(datas);
-        }
-    })
-    
-}
+})
