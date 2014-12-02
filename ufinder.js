@@ -5,18 +5,18 @@ var fs = require('fs')
   ;
 program
     .version(pkg.version)
-    .option('-p, --path [path]', 'Input search directory')
-    .option('-r, --recursive', 'Recursive')
-    .option('-o, --output [file]', 'Output file')
-    .option('-j, --json', 'Output JSON format')
+    .option('-p, --path [path]', 'input search directory')
+    .option('-r, --recursive', 'recursive')
+    .option('-o, --output [file]', 'output file')
+    .option('-j, --json', 'output JSON format')
     
-    .option('-s, --skipFile', 'Skip file')
-    .option('-i, --includeFile', 'File include filter')
-    .option('-e, --excludeFile', 'File exclude filter')
+    .option('-s, --skipFile', 'skip file')
+    .option('-i, --includeFile', 'file include filter')
+    .option('-e, --excludeFile', 'file exclude filter')
     
-    .option('-S, --skipDir', 'Skip directory')
-    .option('-I, --includeDir', 'Directory exclude filter')
-    .option('-E, --excludeFile', 'Directory exclude filter')
+    .option('-S, --skipDir', 'skip directory')
+    .option('-I, --includeDir', 'directory exclude filter')
+    .option('-E, --excludeFile', 'directory exclude filter')
     .parse(process.argv)
     ;
 

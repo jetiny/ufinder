@@ -7,19 +7,15 @@ ufinder
 
 > Recursive finder for files &amp; directories with asynchronously supported and user defined filters
 
-## Command Line
-
-### Install
+### Command Line
+Install
 ```sh
 $ npm install -g ufinder
 ```
-
-### Usage
+Usage
 ```sh
 $ ufind -h
-```
 
-```
   Usage: ufind [options]
   Options:
     -h, --help           output usage information
@@ -35,17 +31,13 @@ $ ufind -h
     -I, --includeDir     Directory exclude filter
     -E, --excludeFile    Directory exclude filter
 ```
-
-## Library
-
-### Install
+### Library
+Install
 ```sh
 $ npm install --save ufinder
 ```
-
-### Usage
-
-#### options
+Usage
+> options
 ```javascript
 var Finder = require('ufinder')
     ;
@@ -59,7 +51,7 @@ var finder = new Finder({
     excludeDir:'node_*'    //directory exclude filter
 });
 ```
-#### async
+> async
 ```javascript
 finder.find('', function(err, datas){
     if (err) {
@@ -69,7 +61,7 @@ finder.find('', function(err, datas){
     }
 })
 ```
-#### sync
+> sync
 ```javascript
 try {
     var r = finder.findSync('');
