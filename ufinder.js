@@ -10,13 +10,13 @@ program
     .option('-o, --output [file]', 'output file')
     .option('-j, --json', 'output JSON format')
     
-    .option('-s, --skipFile', 'skip file')
-    .option('-i, --includeFile', 'file include filter')
-    .option('-e, --excludeFile', 'file exclude filter')
+    .option('-s, --skipFile [boolean]', 'skip file')
+    .option('-i, --includeFile [filter]', 'file include filter')
+    .option('-e, --excludeFile [filter]', 'file exclude filter')
     
-    .option('-S, --skipDir', 'skip directory')
-    .option('-I, --includeDir', 'directory exclude filter')
-    .option('-E, --excludeFile', 'directory exclude filter')
+    .option('-S, --skipDir [boolean]', 'skip directory')
+    .option('-I, --includeDir [filter]', 'directory exclude filter')
+    .option('-E, --excludeFile [filter]', 'directory exclude filter')
     .parse(process.argv)
     ;
 
