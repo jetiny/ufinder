@@ -20,7 +20,7 @@ program
     .parse(process.argv)
     ;
 
-(!program.path || (program.path === true)) && (program.path = '');
+(!program.path || (program.path === true)) && (program.path = '.');
 
 var buffered = program.json || program.output;
 
