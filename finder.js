@@ -29,7 +29,7 @@ function getRegExp(opts, name){
         var re = parseAsRegexp(opts[name]);
 		if (re) {
 			return function(dist){
-				re.exec(dist)
+				return re.exec(dist)
 			};
 		} else if (typeof opts[name] == 'string'){
 			return function(dist){
