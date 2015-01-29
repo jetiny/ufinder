@@ -29,7 +29,7 @@ $ ufind -h
     -e, --excludeFile    File exclude filter
     -S, --skipDir        Skip directory
     -I, --includeDir     Directory exclude filter
-    -E, --excludeFile    Directory exclude filter
+    -E, --excludeDile    Directory exclude filter
 ```
 ### Library
 Install
