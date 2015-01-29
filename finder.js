@@ -16,7 +16,7 @@ function parseAsRegexp(val){
         return new RegExp(val[0], val[1]);
     } else if (val instanceof Object) {
         return new RegExp(val.pattern, val.flags);
-    } else {
+    } else if (typeof val == 'string' ) {
         var flags = val.lastIndexOf('/');
         if (val.length && flags > 0) {
             return new RegExp(val.substr(1, flags-1), val.substr(flags+1, val.length));
@@ -27,9 +27,15 @@ function parseAsRegexp(val){
 function getRegExp(opts, name){
     if (opts[name]){
         var re = parseAsRegexp(opts[name]);
-        return function(dist){
-            return re ? re.exec(dist) : minimatch(dist, opts[name]);
-        }
+		if (re) {
+			return function(dist){
+				re.exec(dist)
+			};
+		} else if (typeof opts[name] == 'string'){
+			return function(dist){
+				return minimatch(dist, opts[name]);
+			}
+		}
     }
 }
 
