@@ -16,7 +16,7 @@ program
     
     .option('-S, --skipDir [boolean]', 'skip directory')
     .option('-I, --includeDir [filter]', 'directory exclude filter')
-    .option('-E, --excludeFile [filter]', 'directory exclude filter')
+    .option('-E, --excludeDir [filter]', 'directory exclude filter')
     .parse(process.argv)
     ;
 
